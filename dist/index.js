@@ -630,7 +630,9 @@ module.exports =
                   `aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin ${registry}`
               );
             } else {
-              cp.execSync(`$(aws ecr get-login-password --region ${region} --no-include-email)`);
+              cp.execSync(
+                  `aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin ${registry}`
+              );
             }
           } else if (username && password) {
             core.info(`Logging into Docker registry ${registry}...`);
